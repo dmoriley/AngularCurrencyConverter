@@ -8,7 +8,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./currency-converter.component.css']
 })
 export class CurrencyConverterComponent implements OnInit {
-  private apiDown;
+  apiDown;
   showDisclaimer;
   currencies = ['CAD', 'USD', 'EUR'];
   rates;
