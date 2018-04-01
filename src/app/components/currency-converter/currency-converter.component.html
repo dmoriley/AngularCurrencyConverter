@@ -1,0 +1,60 @@
+<div class="app">
+
+  <div class="jumbotron" *ngIf="apiDown; else mainContent">
+    <h1 class="display-4">The server is down right now.</h1>
+    <p class="lead">Sorry about that. We'll get it back up as soon as possible.</p>
+  </div>
+
+  <ng-template #mainContent>
+    <div class="container">
+        <h1>Currency Converter</h1>
+        <div [formGroup]="form">
+            <div class="form-group">
+                <label for="input-currency">Type in amount and select currency:</label>
+                <input 
+                    class="form-control" 
+                    id="input-currency" 
+                    type="text" 
+                    placeholder="0.00"
+                    formControlName="inputAmount"
+                    currencyInput
+                    (keyup)="updateConversion()"
+                />
+                <select 
+                    class="form-control" 
+                    name="input-currency-type" 
+                    id="input-currency-type" 
+                    formControlName="inputCurrency"
+                    (change)="updateConversion()"
+                >
+                    <option *ngFor="let i of currencies" [ngValue]="i" >{{i}}</option>
+                </select>
+            </div>
+        
+            <div class="form-group">
+                <label for="output-currency">Converted Amount:</label>
+                <input 
+                    class="form-control" 
+                    id="output-currency" 
+                    type="text" 
+                    placeholder="0.00" 
+                    formControlName="outputAmount"
+                    (change)="updateConversion()"
+                />
+                <select class="form-control" name="output-currency-type" id="output-currency-type" formControlName="outputCurrency">
+                    <option *ngFor="let i of currencies" [value]="i">{{i}}</option>
+                </select>
+            </div>
+        </div>
+    
+        <button class="btn btn-primary" (click)="showDisclaimer = !showDisclaimer" >Disclaimer</button>
+  
+        <div class="alert alert-info card card-body" *ngIf="showDisclaimer">
+          Addtional Information: 
+          <br/>
+          This is the additional Information about the conversion rates.
+        </div>
+  
+    </div>
+  </ng-template>
+</div>
